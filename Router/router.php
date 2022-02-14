@@ -1,12 +1,13 @@
 <?php
-// require_once("../Controllers/UserController.php");
+// require_once("../Controllers/PostController.php");
+// $a=PostController::getPostsByUserID();
+
 // //Get path from the request with no domain name
 // $request=$_SERVER["PHP_SELF"];
 
 // //localhost/facebook-back-end/Router/Router.php/user/create
 // // $controller_name=explode("/",$request)[5];
 // // $controller_action=explode("/",$request)[6];
-// $a=UserController::read();
 
 // switch ($route){
     //Get the right directory of the ControllerName.php and import it into the router php file.
