@@ -1,8 +1,8 @@
 <?php
-// CRUD Opertation
+// CRUD Operation
 class PostController
 {
-    //post_id	user_id	text	date_created
+    //post_id    user_id    text    date_created
 
     public function create()
     {
@@ -31,10 +31,18 @@ class PostController
         $query->execute();
     }
 
-    public function read(){
+    public function read()
+    {
         include "../DB/DBConnection.php";
 
-        $query = $mysqli->prepare("SELECT * FROM post ORDER BY date_created DESC");
+        $query = $mysqli->prepare("SELECT p.post_id, u.first_name, u.last_name, u.profile_pic, p.text, p.date_created, Count(l.likes_id) as numOfLikes
+        FROM post as p
+        LEFT JOIN likes as l
+        ON p.post_id=l.post_id
+        JOIN user_info as u
+        ON p.user_id=u.user_id
+        GROUP BY p.post_id
+        ORDER BY date_created DESC");
         $query->execute();
         $array = $query->get_result();
         $array_response = [];
@@ -50,7 +58,15 @@ class PostController
         include "../DB/DBConnection.php";
 
         $user_id = $_POST["user_id"];
-        $query = $mysqli->prepare("SELECT * FROM post WHERE user_id=? ORDER BY date_created DESC");
+        $query = $mysqli->prepare("SELECT p.post_id, u.first_name, u.last_name, u.profile_pic, p.text, p.date_created, Count(l.likes_id) as numOfLikes
+        FROM post as p
+        LEFT JOIN likes as l
+        ON p.post_id=l.post_id
+        JOIN user_info as u
+        ON p.user_id=u.user_id
+        WHERE u.user_id=1
+        GROUP BY p.post_id
+        ORDER BY date_created DESC");
         $query->bind_param("i", $user_id);
         $query->execute();
         $array = $query->get_result();
@@ -63,4 +79,3 @@ class PostController
         echo $json_response;
     }
 }
-?>
