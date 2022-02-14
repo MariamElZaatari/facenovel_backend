@@ -1,4 +1,6 @@
 <?php
+
+//Require_once includes the php file once by checking if it's already included
 require_once "../Controllers/AuthController.php";
 require_once "../Controllers/BlockController.php";
 require_once "../Controllers/EducationController.php";
@@ -9,7 +11,7 @@ require_once "../Controllers/PostController.php";
 require_once "../Controllers/UserController.php";
 require_once "../Controllers/WorkController.php";
 
-//Example: facebook-back-end/Controllers/Router.php/post/create
+//Example: facebook-back-end/router/router.php/post/create
 $requested_url = $_SERVER["PHP_SELF"];
 
 // post
@@ -73,20 +75,20 @@ switch ($server_path) {
     case 'Likes/getLikesByUserID':
         LikesController::getLikesByUserID();
         break;
-    
-    //Post Controller 
-    case 'Post/create':
-        PostController::create();
-        break;
-    case 'Post/read':
-        PostController::read();
-        break;
-    case 'Post/delete':
-        PostController::delete();
-        break;
-    case 'Post/getPostsByUserID':
-        PostController::getPostsByUserID();
-        break;
+        
+        //Post Controller 
+        case 'Post/create':
+            PostController::create();
+            break;
+        case 'Post/read':
+            PostController::read();
+            break;
+        case 'Post/delete':
+            PostController::delete();
+            break;
+        case 'Post/getPostsByUserID':
+            PostController::getPostsByUserID();
+            break;
     
     //Default
     default:
