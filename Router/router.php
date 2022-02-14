@@ -1,31 +1,96 @@
 <?php
-require_once("../Controllers/WorkController.php");
-$a=WorkController::getWorkByUserID();
+require_once "../Controllers/AuthController.php";
+require_once "../Controllers/BlockController.php";
+require_once "../Controllers/EducationController.php";
+require_once "../Controllers/FriendController.php";
+require_once "../Controllers/FriendRequestController.php";
+require_once "../Controllers/LikesController.php";
+require_once "../Controllers/PostController.php";
+require_once "../Controllers/UserController.php";
+require_once "../Controllers/WorkController.php";
 
-// //Get path from the request with no domain name
-// $request=$_SERVER["PHP_SELF"];
+//Example: facebook-back-end/Controllers/Router.php/post/create
+$requested_url = $_SERVER["PHP_SELF"];
 
-// //localhost/facebook-back-end/Router/Router.php/user/create
-// // $controller_name=explode("/",$request)[5];
-// // $controller_action=explode("/",$request)[6];
+// post
+$controller = explode("/", $requested_url)[4];
+// create
+$method = explode("/", $requested_url)[5];
+// post/create
+$server_path = $controller . "/" . $method;
 
-// switch ($route){
-    //Get the right directory of the ControllerName.php and import it into the router php file.
-    // case "UserController":
-    //     require __DIR__ . "/Controllers/UserController.php";
-    //     break;
-    // case "api2":
-    //     require __DIR__ . "/Controllers/api2.php";
-    //     break;
-    // case "api3":
-    //     require __DIR__ . "/Controllers/api3.php";
-    //     break;
-    // case "api4":
-    //     require __DIR__ . "/Controllers/api4.php";
-    //     break;
-    // //If user case was none of the api, then a json object with a 404 status and page not found is sent;
-    // default: 
-    //     echo json_encode(array("status"=>404,"message"=>"Page Not Found"));
-    //     break;
-// }
+
+switch ($server_path) {
+    //User Controller 
+    case 'User/create':
+        UserController::create();
+        break;
+    case 'User/read':
+        UserController::read();
+        break;
+    case 'User/update':
+        UserController::update();
+        break;
+    case 'User/delete':
+        UserController::delete();
+        break;
+
+    //Work Controller 
+    case 'Work/create':
+        WorkController::create();
+        break;
+    case 'Work/update':
+        WorkController::update();
+        break;
+    case 'Work/delete':
+        WorkController::delete();
+        break;
+    case 'Work/getWorkByUserID':
+        WorkController::getWorkByUserID();
+        break;
+
+    //Education Controller 
+    case 'Education/create':
+        EducationController::create();
+        break;
+    case 'Education/update':
+        EducationController::update();
+        break;
+    case 'Education/delete':
+        EducationController::delete();
+        break;
+    case 'Education/getEducationByUserID':
+        EducationController::getEducationByUserID();
+        break;
+    
+    //Likes Controller 
+    case 'Likes/create':
+        LikesController::create();
+        break;
+    case 'Likes/delete':
+        LikesController::delete();
+        break;
+    case 'Likes/getLikesByUserID':
+        LikesController::getLikesByUserID();
+        break;
+    
+    //Post Controller 
+    case 'Post/create':
+        PostController::create();
+        break;
+    case 'Post/read':
+        PostController::read();
+        break;
+    case 'Post/delete':
+        PostController::delete();
+        break;
+    case 'Post/getPostsByUserID':
+        PostController::getPostsByUserID();
+        break;
+    
+    //Default
+    default:
+        echo json_encode(array("status"=>404, "message"=>"Server Cannot Find The Requested Resource"));
+        break;
+}
 ?>
