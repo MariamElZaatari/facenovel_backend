@@ -1,7 +1,7 @@
 <?php
 
 include("../DB/DBConnection.php");
-
+/*
 //init variables
 $first_name=$_POST["first_name"];
 $last_name = $_POST["last_name"];
@@ -134,5 +134,28 @@ function matchPasswords($password, $password_repeated){
     }
     return $result;
 }
+*/
+
+//login code
+$username=$_POST["username"];
+$pass = $_POST["password"];
+
+$get_user = $mysqli->prepare("SELECT user_id FROM user WHERE username = '$username' AND password = '$pass';"); 
+$get_user->execute();
+
+//$query->store_result();
+//print_r($query->num_rows);
+
+$array = $get_user->get_result();
+$id;
+$array_response = [];
+while($user = $array->fetch_assoc()){
+    $id = $user['user_id'];
+    echo ($id);
+    $array_response[] = $user;
+}
+
+$json_response = json_encode($array_response);
+echo $json_response;
 
 ?>
