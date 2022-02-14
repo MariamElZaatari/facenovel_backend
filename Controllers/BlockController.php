@@ -7,7 +7,7 @@ class BlockController
     {
         include "../DB/DBConnection.php";
         $user_id = $_POST["user_id"];
-        $post_id = $_POST["blocked_user_id"];
+        $blocked_user_id = $_POST["blocked_user_id"];
 
         $query = $mysqli->prepare("INSERT INTO `block` VALUES (NULL,?,?)");
         $query->bind_param("ss", $user_id, $blocked_user_id);
