@@ -64,7 +64,7 @@ class PostController
         ON p.post_id=l.post_id
         JOIN user_info as u
         ON p.user_id=u.user_id
-        WHERE u.user_id=1
+        WHERE u.user_id=?
         GROUP BY p.post_id
         ORDER BY date_created DESC");
         $query->bind_param("i", $user_id);
