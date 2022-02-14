@@ -31,20 +31,7 @@ class BlockController
         $query->execute();
     }
 
-    public function read(){
-        include "../DB/DBConnection.php";
-
-        $query = $mysqli->prepare("");
-        $query->execute();
-        $array = $query->get_result();
-        $array_response = [];
-
-        while ($user_info = $array->fetch_assoc()) {
-            $array_response[] = $user_info;
-        }
-        $json_response = json_encode($array_response);
-        echo $json_response;
-    }
+    
     public function getBlockedUsers()
     {
         include "../DB/DBConnection.php";
