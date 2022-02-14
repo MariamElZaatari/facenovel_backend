@@ -1,6 +1,6 @@
 <?php
-require_once("../Controllers/EducationController.php");
-$a=EducationController::getEducationByUserID();
+require_once("../Controllers/WorkController.php");
+$a=WorkController::getWorkByUserID();
 
 // //Get path from the request with no domain name
 // $request=$_SERVER["PHP_SELF"];

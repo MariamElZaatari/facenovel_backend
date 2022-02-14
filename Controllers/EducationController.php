@@ -55,7 +55,7 @@ class EducationController
         include "../DB/DBConnection.php";
 
         $user_id = $_POST["user_id"];
-        $query = $mysqli->prepare("SELECT * FROM education WHERE user_id=?");
+        $query = $mysqli->prepare("SELECT * FROM education WHERE user_id=? ORDER BY date_from DESC, date_to DESC, school_name");
         $query->bind_param("i", $user_id);
         $query->execute();
         $array = $query->get_result();
