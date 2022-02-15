@@ -64,4 +64,5 @@ class FriendController
         $json_response = json_encode($array_response);
         echo $json_response;
     }
+}
 ?>

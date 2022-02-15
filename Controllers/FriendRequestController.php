@@ -1,10 +1,7 @@
 <?php 
 include("../DB/DBConnection.php");
 
-
-
-
-class LikesController
+class FriendRequestController
 {
     // likes_id	user_id	post_id
 

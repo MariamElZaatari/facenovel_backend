@@ -23,6 +23,13 @@ $server_path = $controller . "/" . $method;
 
 
 switch ($server_path) {
+    //Auth Controller
+    case 'Auth/signup':
+        AuthController::signup();
+        break;
+    case 'Auth/login':
+        AuthController::login();
+        break;
     //User Controller 
     case 'User/create':
         UserController::create();
