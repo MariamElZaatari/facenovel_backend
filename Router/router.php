@@ -30,6 +30,18 @@ switch ($server_path) {
     case 'Auth/login':
         AuthController::login();
         break;
+    
+    //Friend Controller 
+    case 'Friend/create':
+        FriendController::create();
+        break;
+    case 'Friend/getFriendsByUserID':
+        FriendController::getFriendsByUserID();
+        break;
+    case 'Friend/delete':
+        FriendController::delete();
+        break;
+    
     //User Controller 
     case 'User/create':
         UserController::create();
