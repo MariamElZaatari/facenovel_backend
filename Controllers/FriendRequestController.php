@@ -30,7 +30,7 @@ class FriendRequestController
         $date_created = date("Y-m-d H:i:sa");
         $date_updated = date("Y-M-D H:i:sa");
 
-        $query = $mysqli->prepare("UPDATE `friend_request` SET `status`=? `date_updated`=? WHERE requester_id=? AND receiver_id=?;");
+        $query = $mysqli->prepare("UPDATE `friend_request` SET `status`=?`date_updated`=? WHERE requester_id=? AND receiver_id=?;");
         $query->bind_param("sii", $status, $requester_id, $receiver_id);
         $query->execute();
     }

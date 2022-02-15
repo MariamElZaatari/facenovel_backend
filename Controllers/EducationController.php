@@ -27,11 +27,10 @@ class EducationController
         $school_name = $_POST["school_name"];
         $date_from = $_POST["date_from"];
         $date_to = $_POST["date_to"];
-        $date_created = $_POST["date_created"];
         $date_updated = $_POST["date_updated"];
 
-        $query = $mysqli->prepare("UPDATE `education` SET `school_name`=?,`date_from`=?,`date_to`=?,`date_created`=?,`date_updated`=? WHERE `education_id`=?");
-        $query->bind_param("sssssi", $school_name, $date_from, $date_to, $date_created, $date_updated, $education_id);
+        $query = $mysqli->prepare("UPDATE `education` SET `school_name`=?,`date_from`=?,`date_to`=?, `date_updated`=? WHERE `education_id`=?");
+        $query->bind_param("ssssi", $school_name, $date_from, $date_to, $date_updated, $education_id);
         $query->execute();
     }
 

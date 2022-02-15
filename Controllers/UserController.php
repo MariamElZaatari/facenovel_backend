@@ -38,11 +38,10 @@ class UserController
         $profile_pic = $_POST["profile_pic"];
         $bio_text = $_POST["bio_text"];
         $current_city = $_POST["current_city"];
-        $date_created = $_POST["date_created"];
         $date_updated = $_POST["date_updated"];
 
-        $query = $mysqli->prepare("UPDATE `user_info` SET `first_name`=?,`last_name`=?,`email`=?,`phone`=?,`gender`=?,`dob`=?,`profile_pic`=?,`bio_text`=?,`current_city`=?,`date_created`=?,`date_updated`=? WHERE `user_id`=?");
-        $query->bind_param("sssssssssssi", $first_name, $last_name, $email, $phone, $gender, $dob, $profile_pic, $bio_text, $current_city, $date_created, $date_updated, $user_id);
+        $query = $mysqli->prepare("UPDATE `user_info` SET `first_name`=?,`last_name`=?,`email`=?,`phone`=?,`gender`=?,`dob`=?,`profile_pic`=?,`bio_text`=?,`current_city`=?,`date_updated`=? WHERE `user_id`=?");
+        $query->bind_param("ssssssssssi", $first_name, $last_name, $email, $phone, $gender, $dob, $profile_pic, $bio_text, $current_city, $date_updated, $user_id);
         $query->execute();
 
     }
