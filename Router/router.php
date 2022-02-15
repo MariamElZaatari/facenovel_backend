@@ -42,6 +42,17 @@ switch ($server_path) {
         FriendController::delete();
         break;
     
+    //FriendRequest Controller 
+    case 'FriendRequest/create':
+        FriendRequestController::create();
+        break;
+    case 'FriendRequest/getFriendRequestsByUserID':
+        FriendRequestController::getFriendRequestsByUserID();
+        break;
+    case 'FriendRequest/delete':
+        FriendRequestController::delete();
+        break;
+    
     //User Controller 
     case 'User/create':
         UserController::create();
