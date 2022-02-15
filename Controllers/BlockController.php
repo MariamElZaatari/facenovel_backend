@@ -2,22 +2,19 @@
 
 class BlockController
 {
-    // likes_id	user_id	post_id
+    // block_id	user_id	blocked_user_id	date_created
     public function create()
     {
         include "../DB/DBConnection.php";
+
         $user_id = $_POST["user_id"];
         $blocked_user_id = $_POST["blocked_user_id"];
+        $date_created = date("Y-m-d");
 
-        $query = $mysqli->prepare("INSERT INTO `block` VALUES (NULL,?,?)");
-        $query->bind_param("ss", $user_id, $blocked_user_id);
+        $query = $mysqli->prepare("INSERT INTO `block` VALUES (NULL,?,?,?)");
+        $query->bind_param("iis", $user_id, $blocked_user_id, $date_created);
         $query->execute();
     }
-
-    //No Update for Likes Table
-    // public function update()
-    // {
-    // }
 
     public function delete()
     {
@@ -26,18 +23,24 @@ class BlockController
         $user_id = $_POST["user_id"];
         $blocked_user_id = $_POST["blocked_user_id"];
 
-        $query = $mysqli->prepare("DELETE FROM block WHERE user_id=? AND blocked_user_id=?");
-        $query->bind_param("ss", $user_id, $blocked_user_id);
+        $query = $mysqli->prepare("DELETE FROM `block` WHERE user_id=? AND blocked_user_id=?");
+        $query->bind_param("ii", $user_id, $blocked_user_id);
         $query->execute();
     }
 
     
-    public function getBlockedUsers()
+    public function getBlocksByUserID()
     {
         include "../DB/DBConnection.php";
 
         $user_id = $_POST["user_id"];
-        $query = $mysqli->prepare("SELECT blocked_user_id FROM block WHERE user_id = '$user_id';");
+        $query = $mysqli->prepare("SELECT b.blocked_user_id, u.first_name, u.last_name, u.profile_pic, 
+        u.bio_text
+        FROM `block` as b
+        JOIN user_info as u
+        ON b.blocked_user_id=u.user_id 
+        WHERE b.user_id = ?
+        ORDER BY b.date_created");
         $query->bind_param("i", $user_id);
         $query->execute();
         $array = $query->get_result();
@@ -50,6 +53,4 @@ class BlockController
         echo $json_response;
     }
 }
-
-
 ?>
