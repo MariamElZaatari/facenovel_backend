@@ -1,4 +1,5 @@
 <?php
+require_once "../Validators/Validator.php";
 
 class LikesController
 {
@@ -7,12 +8,39 @@ class LikesController
     public function create()
     {
         include "../DB/DBConnection.php";
-        $user_id = $_POST["user_id"];
-        $post_id = $_POST["post_id"];
+         // check if the values are set.
+         if (!isset($_POST["user_id"]) || !isset($_POST["post_id"])) {
+            echo json_encode(array("status" => 400, "message" => "Some info is not set"));
+            return false;
+        }
+
+        // validating the input.
+        if (Validator::id($_POST["user_id"]) && Validator::id($_POST["post_id"])) {
+            $user_id = $_POST["user_id"];
+            $post_id = $_POST["post_id"];
+        } else {
+            return false;
+        }
+
+
+        // checking if the Like ALready Exists, then do not add like Again.
+        $query = $mysqli->prepare("SELECT * FROM `likes` WHERE user_id = ? AND post_id = ?");
+        $query->bind_param("ii", $user_id, $post_id);
+        $query->execute();
+        $query->store_result();
+
+        if($query->num_rows() == 1){
+            echo json_encode(array("status" => 200, "message" => "Like Already Exists"));
+            return false;
+        }
+
 
         $query = $mysqli->prepare("INSERT INTO `likes` VALUES (NULL,?,?)");
         $query->bind_param("ii", $user_id, $post_id);
         $query->execute();
+
+        echo json_encode(array("status" => 200, "message" => "Like Added Successfully"));
+
     }
 
     //No Update for Likes Table
@@ -24,12 +52,26 @@ class LikesController
     {
         include "../DB/DBConnection.php";
 
-        $user_id = $_POST["user_id"];
-        $post_id = $_POST["post_id"];
+        // check if the values are set.
+        if (!isset($_POST["user_id"]) || !isset($_POST["post_id"])) {
+            echo json_encode(array("status" => 400, "message" => "Some info is not set"));
+            return false;
+        }
+
+        // validating the input.
+        if (Validator::id($_POST["user_id"]) && Validator::id($_POST["post_id"])) {
+            $user_id = $_POST["user_id"];
+            $post_id = $_POST["post_id"];
+        } else {
+            return false;
+        }
 
         $query = $mysqli->prepare("DELETE FROM likes WHERE user_id=? AND post_id=?");
         $query->bind_param("ii", $user_id, $post_id);
         $query->execute();
+
+        echo json_encode(array("status" => 200, "message" => "Like Deleted Successfully"));
+
     }
 
     //No need for read function
@@ -40,8 +82,21 @@ class LikesController
     {
         include "../DB/DBConnection.php";
 
-        $user_id = $_POST["user_id"];
-        $query = $mysqli->prepare("SELECT Count(*) 
+         // check if the values are set.
+         if (!isset($_POST["user_id"])) {
+            echo json_encode(array("status" => 400, "message" => "Some info is not set"));
+            return false;
+        }
+
+        // validating the input.
+        if (Validator::id($_POST["user_id"])) {
+            $user_id = $_POST["user_id"];
+        } else {
+            return false;
+        }
+
+
+        $query = $mysqli->prepare("SELECT Count(*) as likes
         FROM likes as l
         JOIN post as p
         ON l.post_id=p.post_id
@@ -55,8 +110,7 @@ class LikesController
         while ($user_info = $array->fetch_assoc()) {
             $array_response[] = $user_info;
         }
-        $json_response = json_encode($array_response);
-        echo $json_response;
+        echo json_encode(array("status" => 200, "message" => "Likes Data retrieved Successfully", "data"=> $array_response[0]));
     }
 }
 ?>
