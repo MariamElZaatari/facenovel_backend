@@ -25,7 +25,7 @@ class Validator
 
     public function gender($gender)
     {
-        if ($gender =="m" || $gender =="M" || $gender =="f" || $gender =="F") {
+        if ($gender == "m" || $gender == "M" || $gender == "f" || $gender == "F") {
             return true;
         }
 
@@ -45,7 +45,7 @@ class Validator
 
     public function text($text)
     {
-        if (strlen($text) >= 1 ) {
+        if (strlen($text) >= 1) {
             return true;
         }
 

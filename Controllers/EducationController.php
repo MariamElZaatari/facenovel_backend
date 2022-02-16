@@ -2,7 +2,7 @@
 // CRUD Operation
 class EducationController
 {
-    // education_id	user_id	school_name	date_from	date_to	date_created	date_updated
+    // education_id    user_id    school_name    date_from    date_to    date_created    date_updated
 
     public function create()
     {

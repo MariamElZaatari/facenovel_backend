@@ -9,8 +9,8 @@ class PostController
     public function create()
     {
         include "../DB/DBConnection.php";
-         // check if the values are set.
-         if (!isset($_POST["user_id"]) || !isset($_POST["text"])) {
+        // check if the values are set.
+        if (!isset($_POST["user_id"]) || !isset($_POST["text"])) {
             echo json_encode(array("status" => 400, "message" => "Some info is not set"));
             return false;
         }
@@ -42,8 +42,8 @@ class PostController
     {
         include "../DB/DBConnection.php";
 
-         // check if the values are set.
-         if (!isset($_POST["post_id"])) {
+        // check if the values are set.
+        if (!isset($_POST["post_id"])) {
             echo json_encode(array("status" => 400, "message" => "Some info is not set"));
             return false;
         }
@@ -83,15 +83,15 @@ class PostController
             $array_response[] = $user_info;
         }
 
-        echo json_encode(array("status" => 200, "message" => "Post Data retrieved Successfully", "data"=> $array_response ));
+        echo json_encode(array("status" => 200, "message" => "Post Data retrieved Successfully", "data" => $array_response));
     }
-    
+
     public function getPostsByUserID()
     {
         include "../DB/DBConnection.php";
 
-          // check if the values are set.
-          if (!isset($_POST["user_id"])) {
+        // check if the values are set.
+        if (!isset($_POST["user_id"])) {
             echo json_encode(array("status" => 400, "message" => "Some info is not set"));
             return false;
         }
@@ -121,6 +121,6 @@ class PostController
             $array_response[] = $user_info;
         }
 
-        echo json_encode(array("status" => 200, "message" => "Post Data retrieved Successfully", "data"=> $array_response ));
+        echo json_encode(array("status" => 200, "message" => "Post Data retrieved Successfully", "data" => $array_response));
     }
 }
