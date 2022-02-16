@@ -99,7 +99,6 @@ class AuthController
         $gender = $_POST["gender"];
         $dob = $_POST["dob"];
         $pass = $_POST["password"];
-        $pass_repeat = $_POST["password_repeat"];
 
         //get dates
         $date_created = date("Y-m-d");
@@ -109,6 +108,8 @@ class AuthController
         if (self::validateName($first_name) && self::validateName($last_name) && self::validateEmail($email)
             && self::validatePhone($phone) && isset($dob) && isset($username) && self::validateGender($gender)
             && self::validatePassword($pass) && self::matchPasswords($pass, $pass_repeat)) {
+                
+            //Hash password before storing
             $hashed_password = password_hash($pass, PASSWORD_BCRYPT);
 
             //insert into user table
@@ -124,6 +125,7 @@ class AuthController
             VALUES (?,?,?,?,?,?,?,?,?)");
             $insert_user_info_query->bind_param("issssssss", $last_id, $first_name, $last_name, $email, $phone, $gender, $dob, $date_created, $date_updated);
             $insert_user_info_query->execute();
+            
             //header("location:Login.php");
         } else {
             //header("location:Login.php");
@@ -145,7 +147,7 @@ class AuthController
         $hashed_password = $row['password'];
 
         if (password_verify($pass, $hashed_password)) {
-            $get_user = $mysqli->prepare("SELECT * FROM user WHERE username = ? AND password=?;");
+            $get_user = $mysqli->prepare("SELECT user_id, username, date_created FROM user WHERE username = ? AND password=?;");
             $get_user->bind_param("ss", $username, $hashed_password);
             $get_user->execute();
             $get_user->store_result();
