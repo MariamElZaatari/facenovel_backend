@@ -33,30 +33,6 @@ Facenovel is a facebook clone website, where the user can create account, login,
 <img align="left" alt="GitHub" width="26px" src="https://user-images.githubusercontent.com/3369400/139448065-39a229ba-4b06-434b-bc67-616e2ed80c8f.png" />
 <img align="left" alt="GitHub" width="26px" src="https://user-images.githubusercontent.com/3369400/139447912-e0f43f33-6d9f-45f8-be46-2df5bbc91289.png" /> <br/><br/>
 
-
-## Screenshots
-
-### Log In Screen
-![Log In Screen](/assets/screenshots/Log_In.png?raw=true "Log In Screen")
-##
-### Sign Up Screen
-![Sign Up Screen](/assets/screenshots/Sign_Up.png?raw=true "Sign Up Screen")
-## 
-### Home Screen
-![Home Screen](/assets/screenshots/Home.png?raw=true "Home Screen")
-## 
-### Profile Screen
-![Profile Screen](/assets/screenshots/Profile.png?raw=true "Profile Screen")
-## 
-### Friends Screen
-![Friends Screen](/assets/screenshots/Friends.png?raw=true "Friends Screen")
-## 
-### Settings Screen
-![Settings Screen](/assets/screenshots/Settings.png?raw=true "Settings Screen")
-## 
-### Blocked Screen
-![Blocked Screen](/assets/screenshots/Blocked.png?raw=true "Blocked Screen")
-
 ## Optimizations
 
 MVC Design Pattern was implemented in the backend for optimization of API, where each Database table has a controller. Each Controller included a class with several functions for accessibility.
